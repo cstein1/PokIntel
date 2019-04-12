@@ -16,7 +16,7 @@ class Deck:
         for card in range(num_cards):
             ret_cards.append(
                 self.cards.pop(
-                    randint(0,len(self.cards))
+                    randint(0,len(self.cards)-1)
                     )
                 )
         return ret_cards
