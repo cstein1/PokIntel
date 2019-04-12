@@ -1,6 +1,6 @@
 
 from random import randint
-import Card
+from Card import Card
 
 class Deck:
     def __init__(self):
@@ -20,3 +20,7 @@ class Deck:
                     )
                 )
         return ret_cards
+
+    def __iter__(self):
+        for card in self.cards:
+            yield card

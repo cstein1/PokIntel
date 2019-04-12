@@ -10,8 +10,12 @@ class Hand:
     def __str__(self):
         ostr = "{0} contains the following cards:\n".format(self.name if self.name else "Hand")
         for card in self.cards:
-            ostr += "\t{0}".format(str(card))
+            ostr += "\t{0}\n".format(str(card))
         return ostr
+
+    def __iter__(self):
+        for card in self.cards:
+            yield card
 
 #    @property
 #    def matr(self):
