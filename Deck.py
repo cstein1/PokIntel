@@ -19,3 +19,4 @@ class Deck:
                     randint(0,len(self.cards))
                     )
                 )
+        return ret_cards
