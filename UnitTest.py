@@ -9,13 +9,20 @@ import numpy as np
 
 suits = ["s","h","c","d"]
 
+def pprint(txt, char ="*", width = 80, buffer = 4):
+    print(char*width)
+    print((txt.center(len(txt)+buffer, " ")).center(width, char))
+    print(char*width)
+
 def card_inst():
     c1 = Card("spades", 1)
     c2 = Card("sp", 14)
     c3 = Card("h", 1)
-    try:c3 = Card("h", 60)
+    try:
+        c3 = Card("h", 60)
         assert(False)
-    except: print("Did not make card")
+    except:
+        print("Did not make card")
         assert(True)
 
 def measure_cards():
@@ -74,15 +81,27 @@ def test_game():
 # self._Pair,
 # self._HighCard
 def test_wincons():
-    ## todo
-    return False
+    pprint("Royal Flush")
+    RoyalFlush()
+    pprint("StraightFlush")
+    StraightFlush()
 
 def RoyalFlush():
     for suit in suits:
         h = Hand()
         for i in range(8,13):
             h + Card(suit, i)
-        h.
+        print(str(h))
+        h.evaluateHand()
+        print()
+def StraightFlush():
+    for suit in suits:
+        h = Hand()
+        for i in range(3,8):
+            h+Card(suit,i)
+        print(str(h))
+        h.evaluateHand()
+        print()
 
 runTest = {
     "mkcard": card_inst,
@@ -96,4 +115,4 @@ runTest = {
 }
 
 if __name__ == "__main__":
-    runTest["game test"]()
+    runTest["wincon test"]()

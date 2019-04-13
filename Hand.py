@@ -24,8 +24,10 @@ class Hand:
 
     def __str__(self):
         ostr = "{0} contains the following cards:\n".format(self.name if self.name else "Hand")
-        for card in self.cards:
-            ostr += "\t{0}\n".format(str(card))
+        for ind, card in enumerate(self.cards):
+            ostr += "\t{0}".format(str(card))
+            if ind < len(self.cards)-1:
+                ostr+='\n'
         return ostr
 
     def __iter__(self):
@@ -48,17 +50,19 @@ class Hand:
                 out.append(0)
         return out
 
-    #Here's where it gets hard
+    # We call WinCon enough to merit assigning it to a Hand.WC variable
     def __gt__(self, ohand):
-        return WinCon(self).handRank() > WinCon(ohand).handRank()
+        return WinCon(self.matr).handRank() > WinCon(ohand.matr).handRank()
     def __lt__(self,ohand):
-        return WinCon(self).handRank() < WinCon(ohand).handRank()
+        return WinCon(self.matr).handRank() < WinCon(ohand.matr).handRank()
     def evaluateHand(self):
-        wc = WinCon(self)
+        wc = WinCon(self.matr)
         val = wc.handRank()
-        out_str += "This hand is at best a '{0}' valued at {1}"
+        out_str = "This hand is at best a '{0}' valued at {1}"
         for ind, i in enumerate(wc.wincons):
-            if val < (len(wc.wincons)-ind+1) * 51):
-                out_str.format(i.__name__, val)
+            if val < (len(wc.wincons)-ind+1) * 52:
+                out_str = out_str.format(i.__name__[1:], val)
                 print(out_str)
                 return out_str
+        out_str = out_str.format("N/A", val)
+        print(out_str)
