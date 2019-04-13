@@ -1,5 +1,7 @@
 
 from Card import Card
+from Hand import Hand
+from Deck import Deck
 # {"clubs":0, "diamonds":1, "hearts":2, "spades":3}
 
 def card_inst():
@@ -29,14 +31,26 @@ def see_matr_version():
         for card in pile:
             print(card.matr)
 
+def hand_matr():
+    for _ in range(100):
+        d = Deck()
+        h = Hand(d)
+        for i in h:
+            print(str(i))
+            print(i.matr)
+        print("*"*55)
+        assert(len(h) == 5)
+        assert(h.count(1) == 5)
+    print(h.matr)
 
 
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
     "see cards": see_all_cards,
-    "see cards matr": see_matr_version
+    "see cards matr": see_matr_version,
+    "hand matr": hand_matr
 }
 
 if __name__ == "__main__":
-    runTest["see cards matr"]()
+    runTest["hand matr"]()
