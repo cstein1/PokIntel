@@ -39,6 +39,10 @@ class Card:
     def __str__(self):
         return "Card({0}, {1})".format(self.strsuit, self.num)
 
+    def __iter__(self):
+        for i in self.matr:
+            yield i
+
     @property
     def matr(self):
         a = [0 for i in range(52)]
