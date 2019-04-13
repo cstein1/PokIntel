@@ -1,4 +1,5 @@
 import numpy as np
+from WinCons import WinCon
 
 class Hand:
     def __init__(self, playername = ""):
@@ -49,7 +50,6 @@ class Hand:
 
     #Here's where it gets hard
     def __gt__(self, ohand):
-        pass;
-
+        return WinCon(self).handRank() > WinCon(ohand).handRank()
     def __lt__(self,ohand):
-        pass;
+        return WinCon(self).handRank() < WinCon(ohand).handRank()

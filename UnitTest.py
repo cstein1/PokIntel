@@ -12,7 +12,9 @@ def card_inst():
     c2 = Card("sp", 14)
     c3 = Card("h", 1)
     try:c3 = Card("h", 60)
+        assert(False)
     except: print("Did not make card")
+        assert(True)
 
 def measure_cards():
     c1 = Card("spades", 1)

@@ -16,7 +16,7 @@ class WinCon:
         # List of lists of cards with the same numerical value
         self.bynum = [[i*13 + j for i in range(0,4)] for j in range(0,13)]
 
-    def id(self):
+    def handRank(self):
         # In (reverse_indexed) order of which is best
         # If wincon is true, it will return the highest relevant card,
         # O/w it will return -1 and try the next wincon
