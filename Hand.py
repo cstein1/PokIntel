@@ -19,7 +19,7 @@ class Hand:
     def fill(self, deck, num_cards=5):
         self.draw(deck, num_cards)
 
-    def add(self, card):
+    def __add__(self, card):
         self.cards.append(card)
 
     def __str__(self):

@@ -75,6 +75,13 @@ def test_wincons():
     ## todo
     return False
 
+def RoyalFlush():
+    d = Deck()
+    h = Hand()
+    cards = []
+    for i in range(8,13):
+        cards = 
+
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
