@@ -2,6 +2,7 @@
 from Card import Card
 from Hand import Hand
 from Deck import Deck
+from Model import BasicModel
 # {"clubs":0, "diamonds":1, "hearts":2, "spades":3}
 
 def card_inst():
@@ -43,14 +44,20 @@ def hand_matr():
         assert(h.count(1) == 5)
     print(h.matr)
 
+def test_model():
+    m = BasicModel(3, 128, 52)
+    m.printModel()
+    m.build()
+    m.printModel()
 
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
     "see cards": see_all_cards,
     "see cards matr": see_matr_version,
-    "hand matr": hand_matr
+    "hand matr": hand_matr,
+    "model test": test_model
 }
 
 if __name__ == "__main__":
-    runTest["hand matr"]()
+    runTest["model test"]()
