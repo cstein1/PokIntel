@@ -39,7 +39,7 @@ class Hand:
                 out.append(0)
         return out
 
-    #Here's where it gets hard.
+    #Here's where it gets hard
     def __gt__(self, ohand):
         pass;
 
