@@ -1,3 +1,4 @@
+import numpy as np
 
 class Hand:
     def __init__(self, playername = ""):
@@ -11,7 +12,7 @@ class Hand:
         list_matr_cards = list(map(lambda card: card.matr, self.cards))
         out = 0
         for cardmatr in list_matr_cards:
-            out += cardmatr.count(cnt)
+            out += np.array(cardmatr)#.count(cnt)
         return out
 
     def fill(self, deck, num_cards=5):

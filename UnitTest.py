@@ -3,6 +3,7 @@ from Card import Card
 from Hand import Hand
 from Deck import Deck
 from Model import BasicModel
+from Game import Game
 import numpy as np
 # {"clubs":0, "diamonds":1, "hearts":2, "spades":3}
 
@@ -54,6 +55,10 @@ def test_model():
     print(m.predict(np.ones(52)))
     print(m.predict(np.random.rand(4,52)))
 
+def test_game():
+    g = Game(player_num=2)
+    g.draw()
+
 # self._RoyalFlush,
 # self._StraightFlush,
 # self._Quads,
@@ -74,8 +79,9 @@ runTest = {
     "see cards": see_all_cards,
     "see cards matr": see_matr_version,
     "hand matr": hand_matr,
-    "model test": test_model
+    "model test": test_model,
+    "game test": test_game
 }
 
 if __name__ == "__main__":
-    runTest["hand matr"]()
+    runTest["game test"]()
