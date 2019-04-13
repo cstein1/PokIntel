@@ -3,6 +3,7 @@ from Card import Card
 from Hand import Hand
 from Deck import Deck
 from Model import BasicModel
+import numpy as np
 # {"clubs":0, "diamonds":1, "hearts":2, "spades":3}
 
 def card_inst():
@@ -49,6 +50,8 @@ def test_model():
     m.printModel()
     m.build()
     m.printModel()
+    print(m.predict(np.ones(52)))
+    print(m.predict(np.random.rand(4,52)))
 
 runTest = {
     "mkcard": card_inst,

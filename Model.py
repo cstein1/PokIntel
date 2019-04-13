@@ -1,7 +1,7 @@
 import keras
 from keras import Model
 from keras.layers import Dense, Input
-
+import numpy as np
 
 class BasicModel:
 	def __init__(self, numLayers: int, layerWidth: int, inputSize: int):
@@ -25,3 +25,10 @@ class BasicModel:
 			print("Not built")
 		else:
 			print(self.model.summary())
+
+	#deals with reshaping for single or multiple inputs
+	def predict(self, inp):
+		if len(inp.shape) == 1:
+			return self.model.predict(np.array(inp).reshape(1,-1))[0]
+		else:
+			return self.model.predict(np.array(inp))
