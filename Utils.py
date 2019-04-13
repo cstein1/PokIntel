@@ -3,4 +3,12 @@ def window(iterator, window_width):
     return [tuple([iterator[i] for i in ind]) for ind in inds]
 
 def last_occ(itr, itm):
-  return ''.join(str(i) for i in itr).rindex(str(itm))
+    return ''.join(str(i) for i in itr).rindex(str(itm))
+
+def filter_ind(itr, cond):
+    # cond is function that takes the iterator
+    inds = []
+    for ind, i in enumerate(itr):
+        if cond(i):
+            inds.append(ind)
+    return inds

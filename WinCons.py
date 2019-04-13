@@ -1,5 +1,5 @@
 
-from Utils import window, last_occ
+from Utils import window, last_occ, filter_ind
 
 class WinCon:
     def __init__(self, hand1):
@@ -13,6 +13,8 @@ class WinCon:
           hand1 = hand1[13:]
         # Hand
         self.h = newlist
+        # List of lists of cards with the same numerical value
+        self.bynum = [[i*13 + j for i in range(0,4)] for j in range(0,13)]
 
     def id(self):
         # In (reverse_indexed) order of which is best
@@ -55,12 +57,15 @@ class WinCon:
 
     def _Quads(self):
         # Four of the same card number
-        for ind in range(len(self.h[0])):
-            quad = True
-            for suit in self.h:
-                quad &= suit[ind]
-            if quad:
-                return last_occ(self.flat, 1)
+        for num_list in self.bynum:
+            # [(card_ind, card_presence_val)]
+            cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
+            for cind, cval in cards:
+                clist = []
+                if cval == 1:
+                    clist.append(cind)
+                if len(clist) == 4:
+                    return max(clist)
         return -1
 
     def _FullHouse(self):
@@ -95,4 +100,46 @@ class WinCon:
         return -1
 
     def _Trips(self):
-        
+        # Three of the same number
+        for num_list in self.bynum:
+            # [(card_ind, card_presence_val)]
+            cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
+            for cind, cval in cards:
+                clist = []
+                if cval == 1:
+                    clist.append(cind)
+                if len(clist) == 3:
+                    return max(clist)
+        return -1
+
+    def _TwoPair(self):
+        # Two different pairs
+        for num_list in self.bynum:
+            # [(card_ind, card_presence_val)]
+            cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
+            pairs = []
+            for cind, cval in cards:
+                clist = []
+                if cval == 1:
+                    clist.append(cind)
+                if len(clist) == 2:
+                    pairs.extend(clist)
+                if len(pairs) == 4:
+                    return max(pairs)
+        return -1
+
+    def _Pair(self):
+        # Three of the same number
+        for num_list in self.bynum:
+            # [(card_ind, card_presence_val)]
+            cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
+            for cind, cval in cards:
+                clist = []
+                if cval == 1:
+                    clist.append(cind)
+                if len(clist) == 2:
+                    return max(clist)
+        return -1
+
+    def _HighCard(self):
+        pass
