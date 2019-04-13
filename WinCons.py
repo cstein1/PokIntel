@@ -15,12 +15,7 @@ class WinCon:
         self.h = newlist
         # List of lists of cards with the same numerical value
         self.bynum = [[i*13 + j for i in range(0,4)] for j in range(0,13)]
-
-    def handRank(self):
-        # In (reverse_indexed) order of which is best
-        # If wincon is true, it will return the highest relevant card,
-        # O/w it will return -1 and try the next wincon
-        wincons = [
+        self.wincons = [
             self._RoyalFlush,
             self._StraightFlush,
             self._Quads,
@@ -32,11 +27,16 @@ class WinCon:
             self._Pair,
             self._HighCard
         ]
-        for ind, wincon in enumerate(wincons):
+
+    def handRank(self):
+        # In (reverse_indexed) order of which is best
+        # If wincon is true, it will return the highest relevant card,
+        # O/w it will return -1 and try the next wincon
+        for ind, wincon in enumerate(self.wincons):
             win_ind = wincon()
             if win_ind >= 0:
                 # First element should be largest num
-                return (len(wincons)-ind)*51 + highest_relevant_card
+                return (len(self.wincons)-ind)*51 + highest_relevant_card
 
     def _RoyalFlush(self):
         # if any of the suits in your hand have 1s for each of the highest 5 cards

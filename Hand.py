@@ -53,3 +53,12 @@ class Hand:
         return WinCon(self).handRank() > WinCon(ohand).handRank()
     def __lt__(self,ohand):
         return WinCon(self).handRank() < WinCon(ohand).handRank()
+    def evaluateHand(self):
+        wc = WinCon(self)
+        val = wc.handRank()
+        out_str += "This hand is at best a '{0}' valued at {1}"
+        for ind, i in enumerate(wc.wincons):
+            if val < (len(wc.wincons)-ind+1) * 51):
+                out_str.format(i.__name__, val)
+                print(out_str)
+                return out_str

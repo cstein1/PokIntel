@@ -7,6 +7,8 @@ from Game import Game
 import numpy as np
 # {"clubs":0, "diamonds":1, "hearts":2, "spades":3}
 
+suits = ["s","h","c","d"]
+
 def card_inst():
     c1 = Card("spades", 1)
     c2 = Card("sp", 14)
@@ -25,13 +27,13 @@ def measure_cards():
     print (c2>c3)
 
 def see_all_cards():
-    allcards = [[Card(suit, num) for num in range(1,14)] for suit in ["s","h","c","d"]]
+    allcards = [[Card(suit, num) for num in range(1,14)] for suit in suits]
     for pile in allcards:
         for card in pile:
             print(str(card))
 
 def see_matr_version():
-    allcards = [[Card(suit, num) for num in range(1,14)] for suit in ["c","d","h","s"]]
+    allcards = [[Card(suit, num) for num in range(1,14)] for suit in suits]
     for pile in allcards:
         for card in pile:
             print(card.matr)
@@ -76,11 +78,11 @@ def test_wincons():
     return False
 
 def RoyalFlush():
-    d = Deck()
-    h = Hand()
-    cards = []
-    for i in range(8,13):
-        cards = 
+    for suit in suits:
+        h = Hand()
+        for i in range(8,13):
+            h + Card(suit, i)
+        h.
 
 runTest = {
     "mkcard": card_inst,
