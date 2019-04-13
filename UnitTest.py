@@ -36,7 +36,8 @@ def see_matr_version():
 def hand_matr():
     for _ in range(100):
         d = Deck()
-        h = Hand(d)
+        h = Hand()
+        h.fill(d)
         for i in h:
             print(str(i))
             print(i.matr)
@@ -53,6 +54,20 @@ def test_model():
     print(m.predict(np.ones(52)))
     print(m.predict(np.random.rand(4,52)))
 
+# self._RoyalFlush,
+# self._StraightFlush,
+# self._Quads,
+# self._FullHouse,
+# self._Flush,
+# self._Straight,
+# self._Trips,
+# self._TwoPair,
+# self._Pair,
+# self._HighCard
+def test_wincons():
+    ## todo
+    return False
+
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
@@ -63,4 +78,4 @@ runTest = {
 }
 
 if __name__ == "__main__":
-    runTest["model test"]()
+    runTest["hand matr"]()

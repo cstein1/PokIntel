@@ -1,17 +1,24 @@
 
 class Hand:
-    def __init__(self, deck, playername = ""):
-        self.cards = deck.draw(5)
+    def __init__(self, playername = ""):
+        self.cards = []
         self.name = playername
 
     def draw(self, deck, num_cards = 1):
-        self.cards.append(deck.draw(num_cards))
+        self.cards += deck.draw(num_cards)
+
     def count(self, cnt):
         list_matr_cards = list(map(lambda card: card.matr, self.cards))
         out = 0
         for cardmatr in list_matr_cards:
             out += cardmatr.count(cnt)
         return out
+
+    def fill(self, deck, num_cards=5):
+        self.draw(deck, num_cards)
+
+    def add(self, card):
+        self.cards.append(card)
 
     def __str__(self):
         ostr = "{0} contains the following cards:\n".format(self.name if self.name else "Hand")
