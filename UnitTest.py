@@ -80,7 +80,8 @@ runTest = {
     "see cards matr": see_matr_version,
     "hand matr": hand_matr,
     "model test": test_model,
-    "game test": test_game
+    "game test": test_game,
+    "wincon test": test_wincons
 }
 
 if __name__ == "__main__":

@@ -142,4 +142,4 @@ class WinCon:
         return -1
 
     def _HighCard(self):
-        pass
+        return max(self.flat)
