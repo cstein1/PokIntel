@@ -23,9 +23,6 @@ class Hand:
         for card in self.cards:
             yield card
 
-    def __gt__(self, ohand):
-        pass;
-
     def __len__(self):
         return len(self.cards)
 
@@ -41,3 +38,10 @@ class Hand:
             else:
                 out.append(0)
         return out
+
+    #Here's where it gets hard.
+    def __gt__(self, ohand):
+        pass;
+
+    def __lt__(self,ohand):
+        pass;
