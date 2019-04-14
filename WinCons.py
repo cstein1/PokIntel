@@ -77,6 +77,8 @@ class WinCon:
         trp_packed = self._Trips(fullHouse = True)
         if trp_packed != -1:
             ignore_ind, trp = trp_packed
+        else:
+            return -1
         pp = self._Pair(fullHouse = ignore_ind)
         if trp >= 0 and pp >= 0:
             return max([trp,pp])
