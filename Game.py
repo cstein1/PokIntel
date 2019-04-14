@@ -3,6 +3,7 @@ from Deck import Deck
 from Card import Card
 from Hand import Hand
 import numpy as np
+from tqdm import tqdm
 
 class Game:
     def __init__(self, player_num = 2):
@@ -21,34 +22,31 @@ class Game:
     def determineWinner(self):
         winningInd = 0
         for ind, p in enumerate(self.players):
-            print(self.players[p])
-            print(self.players[p].evaluateHand())
             if self.players[p] > self.players["Player{}".format(winningInd+1)]:
-                print(p, ind)
                 winningInd = ind
         return winningInd
 
     def playRound(self):
         self.draw()
         winind = self.determineWinner()
-        cards = []#np.zeros((self.player_num, 52))
-        res = []#np.zeros(self.player_num)
+        cards = []
+        res = []
         for ind, p in enumerate(self.players):
             cards.append(self.players[p].getHandVector())
             if ind == winind:
                 res.append(1)
             else:
                 res.append(0)
-        #res[winind] = 1
         return cards, res
 
     def playRounds(self, numRounds=1):
         cards = []
         res = []
-        for x in range(numRounds):
+        for x in tqdm(range(numRounds)):
             c, r = self.playRound()
             cards += c
             res += r
+            self.resetGame()
         return np.array(cards), np.array(res)
 
 
