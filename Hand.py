@@ -60,7 +60,7 @@ class Hand:
         val = wc.handRank()
         out_str = "This hand is at best a '{0}' valued at {1}"
         for ind, i in enumerate(wc.wincons):
-            if val < (len(wc.wincons)-ind+1) * 52:
+            if val > (len(wc.wincons)-ind) * 52:
                 out_str = out_str.format(i.__name__[1:], val)
                 print(out_str)
                 return out_str

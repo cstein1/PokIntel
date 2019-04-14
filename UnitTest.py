@@ -7,7 +7,7 @@ from Game import Game
 import numpy as np
 # {"clubs":0, "diamonds":1, "hearts":2, "spades":3}
 
-suits = ["s","h","c","d"]
+suits = ["s","h","d","c"]
 
 def pprint(txt, char ="*", width = 80, buffer = 4):
     print(char*width)
@@ -15,8 +15,8 @@ def pprint(txt, char ="*", width = 80, buffer = 4):
     print(char*width)
 
 def card_inst():
-    c1 = Card("spades", 1)
-    c2 = Card("sp", 14)
+    c1 = Card("spades", 0)
+    c2 = Card("sp", 13)
     c3 = Card("h", 1)
     try:
         c3 = Card("h", 60)
@@ -26,8 +26,8 @@ def card_inst():
         assert(True)
 
 def measure_cards():
-    c1 = Card("spades", 1)
-    c2 = Card("sp", 14)
+    c1 = Card("spades", 0)
+    c2 = Card("sp", 13)
     c3 = Card("h", 1)
     print (c1>c2)
     print (c1<c2)
@@ -97,11 +97,15 @@ def RoyalFlush():
 def StraightFlush():
     for suit in suits:
         h = Hand()
-        for i in range(3,8):
+        for i in range(7,12):
             h+Card(suit,i)
         print(str(h))
         h.evaluateHand()
         print()
+
+def LowestScore():
+    h = Hand()
+    h + Card("")
 
 runTest = {
     "mkcard": card_inst,
