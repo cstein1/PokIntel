@@ -20,10 +20,7 @@ def pprint(txt, char ="*", width = 80, buffer = 4):
     print((txt.center(len(txt)+buffer, " ")).center(width, char))
     print(char*width)
 
-def test_wincons():
-    level = 5
-    maxlev = 5
-    watching = False
+def test_wincons(level = 5, maxlev = 5, watching = False):
     wincons = [
         'RoyalFlush','StraightFlush','Quads','FullHouse','Flush',
         'Straight','Trips','TwoPair','Pair','HighCard'
@@ -105,8 +102,25 @@ def Straight():
             assert("Straight" in evl or "RoyalFlush" in evl)
     print("\n\nTested {} samples".format(500*7))
 
-
-
+def Trips():
+    for _ in range(500):
+        for i in range(13):
+            h = Hand()
+            suits_ = random.sample(suits,3)
+            for s in suits_:
+                h + Card(s, i)
+            ready = False
+            other_two = []
+            while not ready:
+                val_sample = random.randint(0,12)
+                if val_sample != i:
+                    other_two.append(val_sample)
+                    ready =  len(other_two) == 2
+            suits2 = random.sample(suits,2)
+            for s2, o2 in zip(suits2,other_two):
+                h + Card(s2, o2)
+            evl = h.evaluateHand()
+            assert("Trips" in evl or "FullHouse" in evl)
 
 if __name__ == "__main__":
-    test_wincons()
+    test_wincons(level = 6, maxlev = 6, watching = False)
