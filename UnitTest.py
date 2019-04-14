@@ -99,6 +99,18 @@ def compareHands():
     assert(h>h2)
     pprint("h>h2")
 
+def discardCards():
+    h = Hand()
+    h + Card('c', 0)
+    h + Card('d', 1)
+    h + Card('s', 12)
+    h + Card('s', 10)
+    print(str(h))
+    h.toss([0,14])
+    print(str(h))
+    h.toss([3,5])
+    print(str(h))
+
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
@@ -108,9 +120,13 @@ runTest = {
     "model test": test_model,
     "game test": test_game,
     "rounds test": test_rounds,
-    "compare hands": compareHands
+    "compare hands": compareHands,
+    "discard test": discardCards
 }
 
 if __name__ == "__main__":
-    runTest["rounds test"]()
+    runTest["discard test"]()
     #runTest["wincon test"]()
+
+
+#suits = ["s","h","d","c"]

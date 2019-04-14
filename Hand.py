@@ -1,5 +1,6 @@
 import numpy as np
 from WinCons import WinCon
+from Utils import filter_ind, last_occ
 
 class Hand:
     def __init__(self, playername = ""):
@@ -8,6 +9,32 @@ class Hand:
 
     def draw(self, deck, num_cards = 1):
         self.cards += deck.draw(num_cards)
+
+    def toss(self, card_indices):
+        '''Given a list of card.matr indices, remove each from the hand'''
+        def smartRaise(e):
+            raise Exception("[Hand.py] Removing cards failure. \nCard input {0}\nHand {1}\nHand vector {2}"
+                            .format(card_indices, str(self),
+                                    list(map(lambda c:  c.matr.index(1), self.cards))))
+        olen = len(self.cards)
+        tossed = 0
+        for cind in card_indices:
+            # Returns a list (len 1) of a card that has the same vector representatioin as input
+            hand_cind = filter_ind(itr = self.cards,
+                                   # The card index is the same as a a card in the hand
+                                   cond = lambda card: card.matr.index(1) == cind
+                                   )
+            # We want only 1 card... If more than 1 card is found then something is wrong
+            if len(hand_cind) > 1:
+                raise Exception("[Hand.py] Somehow multiple cards of same value in one hand")
+            # If we did find a card in hand in common, then go ahead and attempt to delete it
+            if hand_cind:
+                try: del self.cards[hand_cind[0]]
+                except IndexError as e:
+                    smartRaise(e)
+                tossed += 1
+        if len(self.cards) != olen - len(card_indices) or tossed != len(card_indices):
+            smartRaise(e)
 
     def count(self, cnt):
         list_matr_cards = list(map(lambda card: card.matr, self.cards))
