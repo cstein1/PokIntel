@@ -41,7 +41,11 @@ def RoyalFlush():
         print(str(h))
         evl = h.evaluateHand()
         print()
-        assert("RoyalFlush" in evl)
+        try:
+            assert("RoyalFlush" in evl)
+        except:
+            print(str(h))
+            raise Exception
 
 def StraightFlush():
     from Utils import window
@@ -53,7 +57,11 @@ def StraightFlush():
                 h+Card(suit,j)
             print(str(h))
             evl = h.evaluateHand()
-            assert("StraightFlush" in evl)
+            try:
+                assert("StraightFlush" in evl)
+            except:
+                print(str(h))
+                raise Exception
         print()
 
 def Quads():
@@ -68,7 +76,11 @@ def Quads():
         h + Card(random.sample(suit,1)[0], val_sample)
         print(str(h))
         evl = h.evaluateHand()
-        assert("Quads" in evl)
+        try:
+            assert("Quads" in evl)
+        except:
+            print(str(h))
+            raise Exception
 
 def FullHouse():
     h = Hand()
@@ -89,7 +101,11 @@ def Flush():
             for i in itr:
                 h + Card(suit, i)
             evl = h.evaluateHand()
-            assert("Flush" in evl)
+            try:
+                assert("Flush" in evl)
+            except:
+                print(str(h))
+                raise Exception
     print("\n\nTested 4000 samples")
 
 def Straight():
@@ -99,7 +115,11 @@ def Straight():
             for ind in range(i,i+5):
                 h + Card(random.sample(suits,1)[0], ind)
             evl = h.evaluateHand()
-            assert("Straight" in evl or "RoyalFlush" in evl)
+            try:
+                assert("Straight" in evl or "RoyalFlush" in evl)
+            except:
+                print(str(h))
+                raise Exception
     print("\n\nTested {} samples".format(500*7))
 
 def Trips():
@@ -120,7 +140,11 @@ def Trips():
             for s2, o2 in zip(suits2,other_two):
                 h + Card(s2, o2)
             evl = h.evaluateHand()
-            assert("Trips" in evl or "FullHouse" in evl)
+            try:
+                assert("Trips" in evl or "FullHouse" in evl)
+            except:
+                print(str(h))
+                raise Exception
 
 def TwoPair():
     for _ in range(500):
@@ -147,7 +171,11 @@ def TwoPair():
                 ready = rov
             h + lonerCard
             evl = h.evaluateHand()
-            assert("TwoPair" in evl or "FullHouse")
+            try:
+                assert("TwoPair" in evl or "FullHouse")
+            except:
+                print(str(h))
+                raise Exception
 
 def Pair():
     for _ in range(500):
@@ -167,7 +195,12 @@ def Pair():
             for s3, o3 in zip(suits3,other_three):
                 h + Card(s3, o3)
             evl = h.evaluateHand()
-            assert("Pair" in evl or "FullHouse" in evl)
+            try:
+                assert("Pair" in evl or "FullHouse" in evl)
+            except:
+                print(str(h))
+                raise Exception
 
 if __name__ == "__main__":
-    test_wincons(level = 7, maxlev = 8, watching = False)
+    for _ in range(500):
+        test_wincons(level = 0, maxlev = 8, watching = False)
