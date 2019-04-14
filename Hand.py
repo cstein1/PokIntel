@@ -12,7 +12,7 @@ class Hand:
 
     def toss(self, card_indices):
         '''Given a list of card.matr indices, remove each from the hand'''
-        def smartRaise(e):
+        def smartRaise():
             raise Exception("[Hand.py] Removing cards failure. \nCard input {0}\nHand {1}\nHand vector {2}"
                             .format(card_indices, str(self),
                                     list(map(lambda c:  c.matr.index(1), self.cards))))
@@ -30,11 +30,11 @@ class Hand:
             # If we did find a card in hand in common, then go ahead and attempt to delete it
             if hand_cind:
                 try: del self.cards[hand_cind[0]]
-                except IndexError as e:
-                    smartRaise(e)
+                except IndexError:
+                    smartRaise()
                 tossed += 1
         if len(self.cards) != olen - len(card_indices) or tossed != len(card_indices):
-            smartRaise(e)
+            smartRaise()
 
     def count(self, cnt):
         list_matr_cards = list(map(lambda card: card.matr, self.cards))

@@ -101,6 +101,14 @@ def compareHands():
 
 def discardCards():
     h = Hand()
+    for s in suits:
+        for i in range(13):
+            h + Card(s,i)
+    print(str(h))
+    h.toss([i for i in range(52)])
+    print(str(h))
+
+    h = Hand()
     h + Card('c', 0)
     h + Card('d', 1)
     h + Card('s', 12)
