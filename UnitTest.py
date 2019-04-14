@@ -119,6 +119,12 @@ def discardCards():
     h.toss([3,5])
     print(str(h))
 
+def deckCheck():
+    d = Deck()
+    print(str(d))
+    print(d.matr)
+
+
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
@@ -129,11 +135,12 @@ runTest = {
     "game test": test_game,
     "rounds test": test_rounds,
     "compare hands": compareHands,
-    "discard test": discardCards
+    "discard test": discardCards,
+    "deck check": deckCheck
 }
 
 if __name__ == "__main__":
-    runTest["discard test"]()
+    runTest["deck check"]()
     #runTest["wincon test"]()
 
 
