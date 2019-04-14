@@ -10,7 +10,7 @@ class Card:
                     break;
         if suit not in suits:
             raise Exception("Suit doesn't match any other suits")
-        if num < 0 or num > 13:
+        if num < 0 or num > 12:
             raise Exception("Number out of range 1 to 14")
         self.suit = suits[suit]
         self.strsuit = suit

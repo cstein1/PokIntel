@@ -92,15 +92,20 @@ def RoyalFlush():
         for i in range(8,13):
             h + Card(suit, i)
         print(str(h))
-        h.evaluateHand()
+        evl = h.evaluateHand()
         print()
+        assert("RoyalFlush" in evl)
 def StraightFlush():
+    from Utils import window
+    # Make every possible straight flush
     for suit in suits:
-        h = Hand()
-        for i in range(7,12):
-            h+Card(suit,i)
-        print(str(h))
-        h.evaluateHand()
+        for i in window(list(range(0,12)), 5):
+            h = Hand()
+            for j in range(i[0],i[-1]+1):
+                h+Card(suit,j)
+            print(str(h))
+            evl = h.evaluateHand()
+            assert("StraightFlush" in evl)
         print()
 
 def LowestScore():
@@ -134,4 +139,4 @@ runTest = {
 }
 
 if __name__ == "__main__":
-    runTest["compare hands"]()
+    runTest["wincon test"]()

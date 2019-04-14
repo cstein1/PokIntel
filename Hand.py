@@ -63,6 +63,6 @@ class Hand:
             if val > (len(wc.wincons)-ind) * 52:
                 out_str = out_str.format(i.__name__[1:], val)
                 print(out_str)
-                return out_str
+                return i.__name__[1:]
         out_str = out_str.format("N/A", val)
         print(out_str)
