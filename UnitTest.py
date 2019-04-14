@@ -1,10 +1,11 @@
+import random
+import numpy as np
 
 from Card import Card
 from Hand import Hand
 from Deck import Deck
 from Model import BasicModel
 from Game import Game
-import numpy as np
 # {"clubs":0, "diamonds":1, "hearts":2, "spades":3}
 
 suits = ["s","h","d","c"]
@@ -74,10 +75,16 @@ def test_game():
     print(g.playRound())
 
 def test_wincons():
+    '''
     pprint("Royal Flush")
     RoyalFlush()
     pprint("StraightFlush")
     StraightFlush()
+    '''
+    pprint("Quads")
+    Quads()
+
+
 
 def RoyalFlush():
     for suit in suits:
@@ -100,6 +107,15 @@ def StraightFlush():
             evl = h.evaluateHand()
             assert("StraightFlush" in evl)
         print()
+
+def Quads():
+    for i in range(0,13):
+        h = Hand()
+        for suit in suits:
+            h + Card(suit, i)
+        h + Card(random.sample(suit,1)[0], random.randint(0,13))
+        evl = h.evaluateHand()
+        assert("Quads" in evl)
 
 def LowestScore():
     h = Hand()
@@ -132,4 +148,4 @@ runTest = {
 }
 
 if __name__ == "__main__":
-    runTest["game test"]()
+    runTest["wincon test"]()
