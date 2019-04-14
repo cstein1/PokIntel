@@ -74,6 +74,10 @@ class WinCon:
 
     def _FullHouse(self):
         # One pair, One Trip
+        ignore_ind, trp = self._Trips()
+        pp = self._Pair(fullHouse = ignore_ind)
+        if trp >= 0 and pp >= 0:
+            return max([trp,pp])
         return -1;
 
     def _Flush(self):
@@ -103,15 +107,17 @@ class WinCon:
                 count = []
         return -1
 
-    def _Trips(self):
+    def _Trips(self, fullHouse = False):
         # Three of the same number
-        for num_list in self.bynum:
+        for ind, num_list in enumerate(self.bynum):
             # [(card_ind, card_presence_val)]
             cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
             clist = []
             for cind, cval in cards:
                 if cval == 1:
                     clist.append(cind)
+                if fullHouse: # We need the card num to ignore for the second tuple of fullHouse
+                    return ind, max(clist)
                 if len(clist) == 3:
                     return max(clist)
         return -1
@@ -132,9 +138,14 @@ class WinCon:
                     return max(pairs)
         return -1
 
-    def _Pair(self):
+    def _Pair(self, fullHouse = -1):
         # Three of the same number
-        for num_list in self.bynum:
+        # If fullHouse is true then we look for a double that isn't whatever fullHouse Passed
+        # Specifically, we are removing whatever was a triple
+        bnum = self.bynum[:]
+        if fullHouse>=0:
+            del bnum[fullHouse]
+        for num_list in bnum:
             # [(card_ind, card_presence_val)]
             cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
             clist = []
