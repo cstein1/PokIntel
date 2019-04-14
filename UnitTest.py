@@ -136,6 +136,22 @@ def card_in_list():
     assert(Card('c',0) in a)
     print(Card('c',0) in a)
 
+def optimizeHand():
+    h = Hand()
+    h + Card('s', 8)
+    h + Card('s', 9)
+    h + Card('s', 10)
+    h + Card('s', 11)
+    h + Card('h', 8)
+    highest_score, cards_post_toss, card_tossed = h.optimizeHand(
+        [Card('h',4), Card('h',5), Card('h',6), Card('h',7), Card('s',12)]
+        )
+    print("High score is " + str(highest_score))
+    print("Tossed card is " + str(card_tossed[0]))
+    for card in cards_post_toss:
+        print(str(card))
+
+
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
@@ -149,11 +165,12 @@ runTest = {
     "discard test": discardCards,
     "deck check": deckCheck,
     "hand hold": handHold,
-    "card in list check": card_in_list
+    "card in list check": card_in_list,
+    "optimizeHand": optimizeHand
 }
 
 if __name__ == "__main__":
-    runTest["card in list check"]()
+    runTest["optimizeHand"]()
     #runTest["wincon test"]()
 
 

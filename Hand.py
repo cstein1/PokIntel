@@ -12,29 +12,28 @@ class Hand:
     def draw(self, deck, num_cards = 1):
         self.cards += deck.draw(num_cards)
 
-    def optimizeHand(hypotheticals):
+    def optimizeHand(self, hypotheticals, verbose = False):
         '''
         hypotheticals is a list of cards
         given a list of cards, we want to see which cards would be best to discard
         '''
         cards = self.cards[:]
         cards.extend(hypotheticals)
-        combos = combinations(cards)
+        combos = combinations(cards, 5)
         highest_combo = 0, []
         for combo in combos:
             h = Hand()
             for card in combo:
                 h + card
-            score = h.evaluateHand()
+            score = h.evaluateHand(string_out = False, verbose = verbose)
             if score > highest_combo[0]:
                 highest_combo = score, combo
         discarded = []
         for card in self.cards:
             if card not in highest_combo[1]:
                 discarded.append(card)
-        return highest_combo, discarded
-
-
+        # High Score, List of cards in high score, List of discarded cards
+        return highest_combo[0], highest_combo[1], discarded
 
     def toss(self, card_indices):
         '''Given a list of card.matr indices, remove each from the hand'''
@@ -120,14 +119,17 @@ class Hand:
         return WinCon(self.matr).handRank() > WinCon(ohand.matr).handRank()
     def __lt__(self,ohand):
         return WinCon(self.matr).handRank() < WinCon(ohand.matr).handRank()
-    def evaluateHand(self):
+    def evaluateHand(self, string_out = True, verbose = True):
         wc = WinCon(self.matr)
         val = wc.handRank()
         out_str = "This hand is at best a '{0}' valued at {1}"
         for ind, i in enumerate(wc.wincons):
             if val > (len(wc.wincons)-ind-1) * 52:
                 out_str = out_str.format(i.__name__[1:], val)
-                print(out_str)
-                return i.__name__[1:]
+                if verbose: print(out_str)
+                if string_out: return i.__name__[1:]
+                return val
         out_str = out_str.format("N/A", val)
-        print(out_str)
+        if verbose: print(out_str)
+        if string_out: return out_str
+        return val
