@@ -1,6 +1,8 @@
 import numpy as np
+from itertools import combinations
 from WinCons import WinCon
 from Utils import filter_ind, last_occ
+from Card import Card
 
 class Hand:
     def __init__(self, playername = ""):
@@ -9,6 +11,30 @@ class Hand:
 
     def draw(self, deck, num_cards = 1):
         self.cards += deck.draw(num_cards)
+
+    def optimizeHand(hypotheticals):
+        '''
+        hypotheticals is a list of cards
+        given a list of cards, we want to see which cards would be best to discard
+        '''
+        cards = self.cards[:]
+        cards.extend(hypotheticals)
+        combos = combinations(cards)
+        highest_combo = 0, []
+        for combo in combos:
+            h = Hand()
+            for card in combo:
+                h + card
+            score = h.evaluateHand()
+            if score > highest_combo[0]:
+                highest_combo = score, combo
+        discarded = []
+        for card in self.cards:
+            if card not in highest_combo[1]:
+                discarded.append(card)
+        return highest_combo, discarded
+
+
 
     def toss(self, card_indices):
         '''Given a list of card.matr indices, remove each from the hand'''
@@ -70,6 +96,11 @@ class Hand:
 
     def __len__(self):
         return len(self.cards)
+
+    def __contains__(self, inp):
+        if isinstance(inp, Card):
+            return inp in self.cards
+        raise Exception("[Hand.py] Hand asked if holding a non-card object.")
 
     @property
     def matr(self):

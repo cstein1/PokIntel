@@ -124,6 +124,17 @@ def deckCheck():
     print(str(d))
     print(d.matr)
 
+def handHold():
+    h = Hand()
+    c = Card('c', 0)
+    h + Card('c', 0)
+    assert(c in h)
+    print(c in h)
+
+def card_in_list():
+    a = [Card('c',0), Card('h', 5)]
+    assert(Card('c',0) in a)
+    print(Card('c',0) in a)
 
 runTest = {
     "mkcard": card_inst,
@@ -136,11 +147,13 @@ runTest = {
     "rounds test": test_rounds,
     "compare hands": compareHands,
     "discard test": discardCards,
-    "deck check": deckCheck
+    "deck check": deckCheck,
+    "hand hold": handHold,
+    "card in list check": card_in_list
 }
 
 if __name__ == "__main__":
-    runTest["deck check"]()
+    runTest["card in list check"]()
     #runTest["wincon test"]()
 
 
