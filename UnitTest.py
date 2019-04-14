@@ -72,6 +72,7 @@ def test_game():
     g.draw()
     print(g.determineWinner())
     g.resetGame()
+    print("NEW GAME")
     print(g.playRound())
 
 def test_wincons():
@@ -178,4 +179,4 @@ runTest = {
 }
 
 if __name__ == "__main__":
-    runTest["wincon test"]()
+    runTest["game test"]()

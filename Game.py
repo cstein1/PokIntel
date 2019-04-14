@@ -21,18 +21,20 @@ class Game:
     def determineWinner(self):
         winningInd = 0
         for ind, p in enumerate(self.players):
+            print(self.players[p])
             if self.players[p] > self.players["Player{}".format(winningInd+1)]:
+                print(p, ind)
                 winningInd = ind
-        return ind
+        return winningInd
 
     def playRound(self):
         self.draw()
-        ind = self.determineWinner()
+        winind = self.determineWinner()
         cards = np.zeros((self.player_num, 52))
         res = np.zeros(self.player_num)
         for ind, p in enumerate(self.players):
             cards[ind] = self.players[p].getHandVector()
-        res[ind] = 1
+        res[winind] = 1
         return cards, res
 
 
