@@ -144,7 +144,8 @@ def optimizeHand():
     h + Card('s', 11)
     h + Card('h', 8)
     highest_score, cards_post_toss, card_tossed = h.optimizeHand(
-        [Card('h',4), Card('h',5), Card('h',6), Card('h',7), Card('s',12)]
+        [Card('h',4), Card('h',5), Card('h',6), Card('h',7), Card('s',12)],
+        verbose = True
         )
     print("High score is " + str(highest_score))
     print("Tossed card is " + str(card_tossed[0]))
