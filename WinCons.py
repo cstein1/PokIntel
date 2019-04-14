@@ -39,7 +39,7 @@ class WinCon:
                 # print("[WC] Returned from Win Check {0}".format(win_ind))
                 # print("[WC] Win con found by Win Check index {0}".format(ind))
                 # First element should be largest num
-                return (len(self.wincons)-ind)*52 + win_ind
+                return (len(self.wincons)-ind-1)*52 + win_ind
 
     def _RoyalFlush(self):
         # if any of the suits in your hand have 1s for each of the highest 5 cards
