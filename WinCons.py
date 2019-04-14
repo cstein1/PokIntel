@@ -146,4 +146,4 @@ class WinCon:
         return -1
 
     def _HighCard(self):
-        return max(self.flat)
+        return last_occ(self.flat, 1)
