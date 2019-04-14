@@ -6,7 +6,7 @@ class Deck:
     def __init__(self):
         self.cards = []
         for suit in ["s","h","c","d"]:
-            for num in range(1,14):
+            for num in range(1,13):
                 self.cards.append(Card(suit,num))
 
     def draw(self, num_cards):
