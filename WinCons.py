@@ -85,22 +85,22 @@ class WinCon:
 
     def _Straight(self):
         # Five Numerically adjacent cards, suits are irrelevant
-        count = []
-        # bynum holds the index of each card sharing a num value
-        for indlst in self.bynum:
-            tmpln = len(count)
-            # Look through the indices of value=iteration number of bynum
-            for ind in indlst:
-                # If the index is a 1 in the hand
-                if self.flat[ind]:
-                    count.append(ind)
-                    break;
-            # If we have found 5 in a row, return the highest index val found
-            if len(count) == 5:
-                return max(count)
-            # If we didn't find a card consecutive to the previous ones.
-            if len(count)<=tmpln:
-                count = []
+        for ind, card in enumerate(self.flat):
+            if card:
+                # Ace can only be highest (ind%13==12) or lowest (ind%13==8)
+                if ind%13 <= 8:
+                    itr = range(ind,ind+5)
+                elif ind%13==12:
+                    itr = range(ind-12,ind-7)
+                else:
+                    continue;
+                straight = True
+                for i in itr:
+                    straight &= any(
+                        list(map(lambda suit: suit[i], self.h))
+                        )
+                if straight:
+                    return last_occ(self.flat, 1)
         return -1
 
     def _Trips(self):

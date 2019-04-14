@@ -12,14 +12,11 @@ class Game:
     def resetGame(self):
         nm = "Player{0}"
         self.players = {nm.format(i): Hand(nm.format(i)) for i in range(1,self.player_num+1)}
-        for x in self.players.keys():
-            print(x)
         self.deck = Deck()
 
     def draw(self):
         for p in self.players:
             self.players[p].fill(self.deck)
-            print(self.players[p].count(0))
 
     def determineWinner(self):
         winningInd = 0
@@ -31,10 +28,10 @@ class Game:
     def playRound(self):
         self.draw()
         ind = self.determineWinner()
-        cards = np.zeros(self.player_num, 52)
+        cards = np.zeros((self.player_num, 52))
         res = np.zeros(self.player_num)
         for ind, p in enumerate(self.players):
-            cards[ind] = self.players[p].count()
+            cards[ind] = self.players[p].getHandVector()
         res[ind] = 1
         return cards, res
 

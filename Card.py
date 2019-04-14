@@ -46,7 +46,5 @@ class Card:
     @property
     def matr(self):
         a = [0 for i in range(52)]
-        #print(self.suit * 13 + self.num)
-        print(self.num)
         a[self.suit * 13 + self.num] = 1
         return a
