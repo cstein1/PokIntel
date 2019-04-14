@@ -41,7 +41,7 @@ class WinCon:
                 return (len(self.wincons)-ind-1)*52 + win_ind
 
     def _RoyalFlush(self):
-        # if any of the suits in your hand have 1s for each of the highest 5 cards
+        # if any one of the suits in your hand have 1s for each of the highest 5 cards
         for ind, suit in enumerate(self.h):
             #print("AA " + str(suit[-5:]))
             if all(suit[-5:]):
@@ -49,7 +49,7 @@ class WinCon:
         return -1
 
     def _StraightFlush(self):
-        # if any of the suits have 5 consecutive cards
+        # if any one of the suits have 5 consecutive cards
         for suit in self.h:
             # Breaks up suit-vec into chunks of 5 for each possible consecutive card
             slider = window(suit, 5)
@@ -84,7 +84,7 @@ class WinCon:
         return -1;
 
     def _Flush(self):
-        # Four of a suit
+        # Five of a suit
         for suit in self.h:
             if suit.count(1) == 5:
                 return last_occ(self.flat, 1)
