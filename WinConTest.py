@@ -1,3 +1,8 @@
+'''
+Non-Deterministic tests are the best we've got
+RoyalFlush, and StraightFlush are the only deterministic tests
+'''
+
 import random
 import numpy as np
 
@@ -16,8 +21,8 @@ def pprint(txt, char ="*", width = 80, buffer = 4):
     print(char*width)
 
 def test_wincons():
-    level = 0
-    maxlev = 3
+    level = 5
+    maxlev = 5
     watching = False
     wincons = [
         'RoyalFlush','StraightFlush','Quads','FullHouse','Flush',
@@ -78,6 +83,30 @@ def FullHouse():
     print(str(h))
     evl = h.evaluateHand()
     assert("FullHouse" in evl)
+
+def Flush():
+    for _ in range(1000):
+        for suit in suits:
+            h = Hand()
+            itr = random.sample(list(range(13)), 5)
+            for i in itr:
+                h + Card(suit, i)
+            evl = h.evaluateHand()
+            assert("Flush" in evl)
+    print("\n\nTested 4000 samples")
+
+def Straight():
+    for _ in range(500):
+        for i in range(9):
+            h = Hand()
+            for ind in range(i,i+5):
+                h + Card(random.sample(suits,1)[0], ind)
+            evl = h.evaluateHand()
+            assert("Straight" in evl or "RoyalFlush" in evl)
+    print("\n\nTested {} samples".format(500*7))
+
+
+
 
 if __name__ == "__main__":
     test_wincons()
