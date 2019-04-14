@@ -19,3 +19,5 @@ def filter_ind(itr, cond):
     inds = []
     for ind, i in enumerate(itr):
         if cond(i):
+            inds.append(ind)
+    return inds
