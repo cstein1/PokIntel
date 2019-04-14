@@ -75,15 +75,28 @@ def test_game():
     print(g.playRound())
 
 def test_wincons():
-    '''
-    pprint("Royal Flush")
-    RoyalFlush()
-    pprint("StraightFlush")
-    StraightFlush()
-    '''
-    pprint("Quads")
-    Quads()
-
+    level = 2
+    watching = True
+    if level <= 0:
+        pprint("Royal Flush")
+        RoyalFlush()
+        pprint("Royal Flush Succ")
+        if watching:input("Hit enter to continue")
+    if level <= 1:
+        pprint("StraightFlush")
+        StraightFlush()
+        pprint("Straight Flush Succ")
+        if watching:input("Hit enter to continue")
+    if level <= 2:
+        pprint("Quads")
+        Quads()
+        pprint("Quads Succ")
+        if watching:input("Hit enter to continue")
+    if level <= 3:
+        pprint("Full House")
+        FullHouse()
+        pprint("Full House Succ")
+        if watching:input("Hit enter to continue")
 
 
 def RoyalFlush():
@@ -113,9 +126,25 @@ def Quads():
         h = Hand()
         for suit in suits:
             h + Card(suit, i)
-        h + Card(random.sample(suit,1)[0], random.randint(0,13))
+        ready = False
+        while not ready:
+            val_sample = random.randint(0,12)
+            ready = val_sample != i
+        h + Card(random.sample(suit,1)[0], val_sample)
+        print(str(h))
         evl = h.evaluateHand()
         assert("Quads" in evl)
+
+def FullHouse():
+    h = Hand()
+    h + Card('s',0)
+    h + Card('h',0)
+    h + Card('d', 0)
+    h + Card('s', 1)
+    h + Card('h', 1)
+    evl = h.evaluateHand()
+    #assert("")
+
 
 def LowestScore():
     h = Hand()
