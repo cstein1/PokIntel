@@ -75,30 +75,28 @@ def test_game():
     print("NEW GAME")
     print(g.playRound())
 
+def test_game():
+    g = Game(player_num=2)
+    g.draw()
+    print(g.determineWinner())
+    g.resetGame()
+    print(g.playRound())
+
 def test_wincons():
     level = 0
+    maxlev = 3
     watching = False
-    if level <= 0:
-        pprint("Royal Flush")
-        RoyalFlush()
-        pprint("Royal Flush Succ")
-        if watching:input("Hit enter to continue")
-    if level <= 1:
-        pprint("StraightFlush")
-        StraightFlush()
-        pprint("Straight Flush Succ")
-        if watching:input("Hit enter to continue")
-    if level <= 2:
-        pprint("Quads")
-        Quads()
-        pprint("Quads Succ")
-        if watching:input("Hit enter to continue")
-    if level <= 3:
-        pprint("Full House")
-        FullHouse()
-        pprint("Full House Succ")
-        if watching:input("Hit enter to continue")
-
+    wincons = [
+        'RoyalFlush','StraightFlush','Quads','FullHouse','Flush',
+        'Straight','Trips','TwoPair','Pair','HighCard'
+    ]
+    for ind, wc in enumerate(wincons):
+        pprint(wc)
+        if level <= ind:
+            exec("{0}()".format(wc))
+            pprint("{0} Succ".format(wc))
+            if watching:input("Hit enter to continue")
+        if maxlev == ind: return
 
 def RoyalFlush():
     for suit in suits:
@@ -109,6 +107,7 @@ def RoyalFlush():
         evl = h.evaluateHand()
         print()
         assert("RoyalFlush" in evl)
+
 def StraightFlush():
     from Utils import window
     # Make every possible straight flush
@@ -179,4 +178,5 @@ runTest = {
 }
 
 if __name__ == "__main__":
-    runTest["game test"]()
+    # runTest["game test"]()
+    runTest["wincon test"]()
