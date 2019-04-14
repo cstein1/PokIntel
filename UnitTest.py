@@ -75,8 +75,8 @@ def test_game():
     print(g.playRound())
 
 def test_wincons():
-    level = 2
-    watching = True
+    level = 0
+    watching = False
     if level <= 0:
         pprint("Royal Flush")
         RoyalFlush()
@@ -142,8 +142,9 @@ def FullHouse():
     h + Card('d', 0)
     h + Card('s', 1)
     h + Card('h', 1)
+    print(str(h))
     evl = h.evaluateHand()
-    #assert("")
+    assert("FullHouse" in evl)
 
 
 def LowestScore():

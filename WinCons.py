@@ -74,7 +74,7 @@ class WinCon:
 
     def _FullHouse(self):
         # One pair, One Trip
-        ignore_ind, trp = self._Trips()
+        ignore_ind, trp = self._Trips(fullHouse = True)
         pp = self._Pair(fullHouse = ignore_ind)
         if trp >= 0 and pp >= 0:
             return max([trp,pp])
@@ -116,9 +116,9 @@ class WinCon:
             for cind, cval in cards:
                 if cval == 1:
                     clist.append(cind)
-                if fullHouse: # We need the card num to ignore for the second tuple of fullHouse
-                    return ind, max(clist)
                 if len(clist) == 3:
+                    if fullHouse: # We need the card num to ignore for the second tuple of fullHouse\
+                        return ind, max(clist)
                     return max(clist)
         return -1
 
