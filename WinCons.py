@@ -43,7 +43,7 @@ class WinCon:
     def _RoyalFlush(self):
         # if any of the suits in your hand have 1s for each of the highest 5 cards
         for ind, suit in enumerate(self.h):
-            print("AA " + str(suit[-5:]))
+            #print("AA " + str(suit[-5:]))
             if all(suit[-5:]):
                 return last_occ(self.flat, 1)
         return -1

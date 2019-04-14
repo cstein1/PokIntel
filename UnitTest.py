@@ -107,6 +107,20 @@ def LowestScore():
     h = Hand()
     h + Card("")
 
+def compareHands():
+    h = Hand()
+    for i in range(8,13):
+        h + Card('d', i)
+    h2 = Hand()
+    for i in range(7,12):
+        h2 + Card('d', i)
+    print(str(h))
+    print(str(h.evaluateHand()))
+    print(str(h2))
+    print(str(h2.evaluateHand()))
+    assert(h>h2)
+    pprint("h>h2")
+
 runTest = {
     "mkcard": card_inst,
     "metric_card":measure_cards,
@@ -115,8 +129,9 @@ runTest = {
     "hand matr": hand_matr,
     "model test": test_model,
     "game test": test_game,
-    "wincon test": test_wincons
+    "wincon test": test_wincons,
+    "compare hands": compareHands
 }
 
 if __name__ == "__main__":
-    runTest["wincon test"]()
+    runTest["compare hands"]()
