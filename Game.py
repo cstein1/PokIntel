@@ -12,6 +12,8 @@ class Game:
     def resetGame(self):
         nm = "Player{0}"
         self.players = {nm.format(i): Hand(nm.format(i)) for i in range(1,self.player_num+1)}
+        for x in self.players.keys():
+            print(x)
         self.deck = Deck()
 
     def draw(self):
@@ -22,7 +24,7 @@ class Game:
     def determineWinner(self):
         winningInd = 0
         for ind, p in enumerate(self.players):
-            if self.players[p] > self.players["Player{}".format(winningInd)]:
+            if self.players[p] > self.players["Player{}".format(winningInd+1)]:
                 winningInd = ind
         return ind
 

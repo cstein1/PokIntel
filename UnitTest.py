@@ -69,17 +69,10 @@ def test_model():
 def test_game():
     g = Game(player_num=2)
     g.draw()
+    print(g.determineWinner())
+    g.resetGame()
+    print(g.playRound())
 
-# self._RoyalFlush,
-# self._StraightFlush,
-# self._Quads,
-# self._FullHouse,
-# self._Flush,
-# self._Straight,
-# self._Trips,
-# self._TwoPair,
-# self._Pair,
-# self._HighCard
 def test_wincons():
     pprint("Royal Flush")
     RoyalFlush()
@@ -139,4 +132,4 @@ runTest = {
 }
 
 if __name__ == "__main__":
-    runTest["wincon test"]()
+    runTest["game test"]()

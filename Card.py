@@ -10,7 +10,7 @@ class Card:
                     break;
         if suit not in suits:
             raise Exception("Suit doesn't match any other suits")
-        if num < 0 or num > 12:
+        if num < 0 or num > 13:
             raise Exception("Number out of range 1 to 14")
         self.suit = suits[suit]
         self.strsuit = suit
@@ -46,5 +46,7 @@ class Card:
     @property
     def matr(self):
         a = [0 for i in range(52)]
+        #print(self.suit * 13 + self.num)
+        print(self.num)
         a[self.suit * 13 + self.num] = 1
         return a

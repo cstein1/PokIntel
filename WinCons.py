@@ -33,6 +33,7 @@ class WinCon:
         # If wincon is true, it will return the highest relevant card,
         # O/w it will return -1 and try the next wincon
         for ind, wincon in enumerate(self.wincons):
+            print(wincon)
             win_ind = wincon()
             if win_ind >= 0:
                 # print("[WC] Returned from Win Check {0}".format(win_ind))
@@ -73,7 +74,7 @@ class WinCon:
 
     def _FullHouse(self):
         # One pair, One Trip
-        pass;
+        return -1;
 
     def _Flush(self):
         # Four of a suit
