@@ -64,8 +64,8 @@ class WinCon:
         for num_list in self.bynum:
             # [(card_ind, card_presence_val)]
             cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
+            clist = []
             for cind, cval in cards:
-                clist = []
                 if cval == 1:
                     clist.append(cind)
                 if len(clist) == 4:
@@ -108,8 +108,8 @@ class WinCon:
         for num_list in self.bynum:
             # [(card_ind, card_presence_val)]
             cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
+            clist = []
             for cind, cval in cards:
-                clist = []
                 if cval == 1:
                     clist.append(cind)
                 if len(clist) == 3:
@@ -118,12 +118,12 @@ class WinCon:
 
     def _TwoPair(self):
         # Two different pairs
+        pairs = []
         for num_list in self.bynum:
             # [(card_ind, card_presence_val)]
             cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
-            pairs = []
+            clist = []
             for cind, cval in cards:
-                clist = []
                 if cval == 1:
                     clist.append(cind)
                 if len(clist) == 2:
@@ -137,8 +137,8 @@ class WinCon:
         for num_list in self.bynum:
             # [(card_ind, card_presence_val)]
             cards = list(map(lambda card_ind: (card_ind, self.flat[card_ind]), num_list))
+            clist = []
             for cind, cval in cards:
-                clist = []
                 if cval == 1:
                     clist.append(cind)
                 if len(clist) == 2:
