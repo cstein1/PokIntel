@@ -75,12 +75,11 @@ def test_game():
     print("NEW GAME")
     print(g.playRound())
 
-def test_game():
+def test_rounds():
     g = Game(player_num=2)
-    g.draw()
-    print(g.determineWinner())
-    g.resetGame()
-    print(g.playRound())
+    c, r = g.playRounds(2)
+    print(c)
+    print(r)
 
 def LowestScore():
     h = Hand()
@@ -108,9 +107,10 @@ runTest = {
     "hand matr": hand_matr,
     "model test": test_model,
     "game test": test_game,
+    "rounds test": test_rounds,
     "compare hands": compareHands
 }
 
 if __name__ == "__main__":
-    # runTest["game test"]()
-    runTest["wincon test"]()
+    runTest["rounds test"]()
+    #runTest["wincon test"]()

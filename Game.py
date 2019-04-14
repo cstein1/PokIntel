@@ -22,6 +22,7 @@ class Game:
         winningInd = 0
         for ind, p in enumerate(self.players):
             print(self.players[p])
+            print(self.players[p].evaluateHand())
             if self.players[p] > self.players["Player{}".format(winningInd+1)]:
                 print(p, ind)
                 winningInd = ind
@@ -30,13 +31,25 @@ class Game:
     def playRound(self):
         self.draw()
         winind = self.determineWinner()
-        cards = np.zeros((self.player_num, 52))
-        res = np.zeros(self.player_num)
+        cards = []#np.zeros((self.player_num, 52))
+        res = []#np.zeros(self.player_num)
         for ind, p in enumerate(self.players):
-            cards[ind] = self.players[p].getHandVector()
-        res[winind] = 1
+            cards.append(self.players[p].getHandVector())
+            if ind == winind:
+                res.append(1)
+            else:
+                res.append(0)
+        #res[winind] = 1
         return cards, res
 
+    def playRounds(self, numRounds=1):
+        cards = []
+        res = []
+        for x in range(numRounds):
+            c, r = self.playRound()
+            cards += c
+            res += r
+        return np.array(cards), np.array(res)
 
 
 
