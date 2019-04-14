@@ -122,5 +122,52 @@ def Trips():
             evl = h.evaluateHand()
             assert("Trips" in evl or "FullHouse" in evl)
 
+def TwoPair():
+    for _ in range(500):
+        for i in range(13):
+            h = Hand()
+            suits_ = random.sample(suits,2)
+            for s in suits_:
+                h + Card(s, i)
+            suits_ = random.sample(suits,2)
+            ready = False
+            while not ready:
+                other_val = random.randint(0,12)
+                ready = other_val != i
+            for s in suits_:
+                h + Card(s, other_val)
+            lonersuit = random.sample(suits,1)[0]
+            ready = False
+            # Make sure the last card isn't already in the hand
+            while not ready:
+                lonerCard = Card(lonersuit, random.randint(0,12))
+                rov = True
+                for card in h:
+                    rov &= not (card == lonerCard)
+                ready = rov
+            h + lonerCard
+            evl = h.evaluateHand()
+            assert("TwoPair" in evl or "FullHouse")
+
+def Pair():
+    for _ in range(500):
+        for i in range(13):
+            h = Hand()
+            suits_ = random.sample(suits,2)
+            for s in suits_:
+                h + Card(s, i)
+            ready = False
+            other_three = []
+            while not ready:
+                val_sample = random.randint(0,12)
+                if val_sample != i:
+                    other_three.append(val_sample)
+                    ready = len(other_three) == 3
+            suits3 = random.sample(suits,3)
+            for s3, o3 in zip(suits3,other_three):
+                h + Card(s3, o3)
+            evl = h.evaluateHand()
+            assert("Pair" in evl or "FullHouse" in evl)
+
 if __name__ == "__main__":
-    test_wincons(level = 6, maxlev = 6, watching = False)
+    test_wincons(level = 7, maxlev = 8, watching = False)
