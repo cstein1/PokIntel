@@ -39,6 +39,7 @@ class WinCon:
                 # print("[WC] Win con found by Win Check index {0}".format(ind))
                 # First element should be largest num
                 return (len(self.wincons)-ind-1)*52 + win_ind
+        raise Exception("[WinCons.py] Hit line which shouldnt be hit in handRank")
 
     def _RoyalFlush(self):
         # if any one of the suits in your hand have 1s for each of the highest 5 cards
