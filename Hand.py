@@ -13,7 +13,14 @@ class Hand:
         list_matr_cards = list(map(lambda card: card.matr, self.cards))
         out = 0
         for cardmatr in list_matr_cards:
-            out += np.array(cardmatr)#.count(cnt)
+            out += cardmatr.count(cnt)
+        return out
+
+    def getHandVector(self):
+        list_matr_cards = list(map(lambda card: card.matr, self.cards))
+        out = 0
+        for cardmatr in list_matr_cards:
+            out += np.array(cardmatr)
         return out
 
     def fill(self, deck, num_cards=5):
