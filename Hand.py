@@ -12,6 +12,26 @@ class Hand:
     def draw(self, deck, num_cards = 1):
         self.cards += deck.draw(num_cards)
 
+    def optimalDiscard(self, deck):
+        cardList = deck.draw(5)
+        _, best, remove = self.optimizeHand(cardList)
+        #get true index of each card
+        inds = []
+        bigInd = []
+        removeInds = []
+        for c in self.cards:
+            bigInd.append(np.argmax(c.matr))
+        for r in remove:
+            removeInds.append(np.argmax(r.matr))
+        for b in bigInd:
+            inds.append(sum(i < b for i in bigInd))
+        res = np.zeros(5)
+        for x in range(5):
+            if bigInd[x] in removeInds:
+                res[inds[x]] = 1
+        return res
+
+
     def optimizeHand(self, hypotheticals, verbose = False):
         '''
         hypotheticals is a list of cards

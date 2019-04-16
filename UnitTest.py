@@ -152,6 +152,19 @@ def optimizeHand():
     for card in cards_post_toss:
         print(str(card))
 
+def optimalDiscard():
+    h = Hand()
+    h + Card('s', 8)
+    h + Card('s', 9)
+    h + Card('s', 10)
+    h + Card('s', 11)
+    h + Card('h', 8)
+    d = Deck()
+    h.optimalDiscard(d)
+
+    g = Game()
+    print(g.playDiscards(5))
+
 
 runTest = {
     "mkcard": card_inst,
@@ -167,11 +180,12 @@ runTest = {
     "deck check": deckCheck,
     "hand hold": handHold,
     "card in list check": card_in_list,
-    "optimizeHand": optimizeHand
+    "optimizeHand": optimizeHand,
+    "optimalDiscard": optimalDiscard
 }
 
 if __name__ == "__main__":
-    runTest["optimizeHand"]()
+    runTest["optimalDiscard"]()
     #runTest["wincon test"]()
 
 
