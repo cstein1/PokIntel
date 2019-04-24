@@ -61,6 +61,25 @@ class Game:
             res.append(h.optimalDiscard(d))
         return np.array(cards), np.array(res)
 
+    def playRoughDiscards(self, numRounds=1):
+        cards = []
+        res = []
+       # x = 0
+        for x in tqdm(range(numRounds)):
+            h = Hand()
+            d = Deck()
+            h.fill(d)
+            c = h.getHandVector()
+            r, better = h.roughDiscard(d)
+            if better:
+                cards.append(c)
+                res.append(r)
+                #x += 1
+            # if x%1000 == 0:
+            #     print(x)
+        print(np.array(cards).shape, np.array(res).shape)
+        return np.array(cards), np.array(res)
+
     def playDiscardAgainstRandom(self, discardModel, numRounds=1):
         dm = discardModel
         oneWins = 0.

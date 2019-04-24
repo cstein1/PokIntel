@@ -1,6 +1,8 @@
 
 from Game import Game
 from Model import *
+from Hand import Hand
+from Deck import Deck
 import numpy as np
 
 def main():
@@ -36,7 +38,7 @@ def main():
     # # np.save('inp.npy', inp)
     # inp = np.load('inp_10k.npy')
     # out = np.load('out_10k.npy')
-    # model.model.fit(inp, out, validation_split=0.1, steps_per_epoch=64, epochs=4, validation_steps=64)
+    # model.model.fit(inp, out, validation_split=0.1, steps_per_epoch=64, epochs=8, validation_steps=64)
     # #[0., 0., 0., 1., 0.]
     # print(model.predict(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
     #     0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -47,11 +49,33 @@ def main():
     #     0, 0, 0, 0, 0, 0, 0, 0])))
     # model.model.save_weights('discard.h5')
 
+    # game = Game()
+    # model = DiscardModel(2,256,52)
+    # model.build()
+    # model.model.load_weights('discard_rough.h5')
+    # for x in range(5):
+    #     h = Hand()
+    #     d = Deck()
+    #     h.fill(d)
+    #     print(h)
+    #     print(model.predict(h.getHandVector()))
+    # game.playDiscardAgainstRandom(model, 1000)
+
     game = Game()
     model = DiscardModel(2,256,52)
     model.build()
-    model.model.load_weights('discard.h5')
-    game.playDiscardAgainstRandom(model, 1000)
+    model.printModel()
+    inp, out = game.playRoughDiscards(100000)
+    model.model.fit(inp, out, validation_split=0.1, steps_per_epoch=64, epochs=64, validation_steps=64)
+    #[0., 0., 0., 1., 0.]
+    print(model.predict(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+        0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0])))
+    #[1., 0., 1., 1., 1.]
+    print(model.predict(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1,
+        0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        0, 0, 0, 0, 0, 0, 0, 0])))
+    model.model.save_weights('discard_rough.h5')
 
 
 if __name__ == "__main__":
