@@ -48,3 +48,7 @@ class Card:
         a = [0 for i in range(52)]
         a[self.suit * 13 + self.num] = 1
         return a
+
+    @property
+    def ind(self):
+        return self.suit*13+self.num

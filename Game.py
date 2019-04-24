@@ -5,12 +5,14 @@ from Hand import Hand
 from Model import DiscardModel
 import numpy as np
 from tqdm import tqdm
+from FiveCardDraw_Phases import FCDPhases
 
 class Game:
     def __init__(self, player_num = 2):
         self.player_num = player_num
+        self.pot = 0
         self.resetGame()
-        
+
     def resetGame(self):
         nm = "Player{0}"
         self.players = {nm.format(i): Hand(nm.format(i)) for i in range(1,self.player_num+1)}
@@ -20,6 +22,11 @@ class Game:
         for p in self.players:
             self.players[p].fill(self.deck)
 
+    def playPhases(self):
+        fcd = FCDPhases()
+        for phase in fcd.phases:
+            phase()
+
     def determineWinner(self):
         winningInd = 0
         for ind, p in enumerate(self.players):
@@ -28,6 +35,8 @@ class Game:
         return winningInd
 
     def playRound(self):
+        '''Draws a hand then determines winner.
+        Use this when not using the "buyin" effect'''
         self.draw()
         winind = self.determineWinner()
         cards = []
@@ -95,9 +104,3 @@ class Game:
             if h1 > h2:
                 oneWins += 1.
         print(oneWins/numRounds)
-
-
-
-
-
-

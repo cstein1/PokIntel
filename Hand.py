@@ -5,12 +5,25 @@ from Utils import filter_ind, last_occ
 from Card import Card
 
 class Hand:
-    def __init__(self, playername = ""):
+    def __init__(self, playername = "", funds = 0):
         self.cards = []
         self.name = playername
+        self.funds = funds
 
     def draw(self, deck, num_cards = 1):
         self.cards += deck.draw(num_cards)
+
+    def bet(self, pot, bet_amount = 1, min_bet = 1):
+        # This function will decide how much the hand wants to bet,
+        # And return as such
+        if self.funds <= 0:
+            # RAISE HERE???
+            return 0
+
+        if bet_amount > self.funds:
+            bet_amount = self.funds
+            self.funds = 0
+        return out
 
     def optimalDiscard(self, deck):
         cardList = deck.draw(5)
@@ -34,6 +47,9 @@ class Hand:
 
     def optimizeHand(self, hypotheticals, verbose = False):
         '''
+        This function will draw 5 random cards and find the optimal combination
+        to keep in the hand
+
         hypotheticals is a list of cards
         given a list of cards, we want to see which cards would be best to discard
         '''
@@ -72,7 +88,8 @@ class Hand:
             # We want only 1 card... If more than 1 card is found then something is wrong
             if len(hand_cind) > 1:
                 raise Exception("[Hand.py] Somehow multiple cards of same value in one hand")
-            # If we did find a card in hand in common, then go ahead and attempt to delete it
+            # If we did find a card in hand in common with del list,
+            # then go ahead and attempt to delete it
             if hand_cind:
                 try: del self.cards[hand_cind[0]]
                 except IndexError:

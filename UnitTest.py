@@ -165,6 +165,28 @@ def optimalDiscard():
     g = Game()
     print(g.playDiscards(5))
 
+def class_keeps_properties_assigned_via_iterator():
+    class A:
+        a = [i for i in range(10)]
+        num = 1
+        def __iter__(self):
+            for i in a:
+                yield i
+        def change_num(self, i):
+            self.num = i
+    class B:
+
+
+    cl = A()
+    for i in cl:
+        print("TOP")
+        print(i)
+        i.change_num(10)
+        print(i)
+    for i in cl:
+        print("TOP TWO")
+        print(i)
+
 
 runTest = {
     "mkcard": card_inst,
@@ -181,11 +203,12 @@ runTest = {
     "hand hold": handHold,
     "card in list check": card_in_list,
     "optimizeHand": optimizeHand,
-    "optimalDiscard": optimalDiscard
+    "optimalDiscard": optimalDiscard,
+    "Does it?": class_keeps_properties_assigned_via_iterator
 }
 
 if __name__ == "__main__":
-    runTest["optimalDiscard"]()
+    runTest["Does it?"]()
     #runTest["wincon test"]()
 
 
