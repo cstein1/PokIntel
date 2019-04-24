@@ -56,6 +56,7 @@ class DiscardModel:
             res = self.model.predict(np.array(inp).reshape(1,-1))[0]
         else:
             res = self.model.predict(np.array(inp))
+        #print(res)
         return np.where(res > 0.5, 1, 0)
 
     def printModel(self):

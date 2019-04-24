@@ -44,6 +44,33 @@ class Hand:
                 res[inds[x]] = 1
         return res
 
+    def roughDiscard(self, deck):
+        discard = np.random.randint(2, size=(5))
+        oldval = self.evaluateHand(False, False)
+
+        h1Ind = np.where(self.getHandVector()==1)[0]
+
+        h1ls = []
+        for y in range(5):
+            if discard[y] == 1:
+                h1ls.append(h1Ind[y])
+
+        self.toss(h1ls)
+
+        self.draw(deck, 5-len(self.cards))
+
+        if self.evaluateHand(False, False) > oldval:
+            return discard, True
+        return np.zeros(5), True
+
+    def optimalDiscard52(self, deck):
+        cardList = deck.draw(5)
+        _, best, remove = self.optimizeHand(cardList)
+        res = np.zeros(52)
+        for r in remove:
+            res += r.matr
+        return res
+
 
     def optimizeHand(self, hypotheticals, verbose = False):
         '''
